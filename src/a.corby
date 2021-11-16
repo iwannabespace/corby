@@ -1,5 +1,5 @@
 integer a = 5 ;
-integer b = 234;
+integer b = 234 ;
 integer count = 0 ;
 string _name = "Raskolnikov" ;
 boolean key = false ;

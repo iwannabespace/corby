@@ -65,12 +65,6 @@ char	**ft_split(char *str)
 	{
 		while (_isspace(*str))
 			str++;
-		if (*str == ';')
-		{
-			*array = malloc(2);
-			ft_strlcpy(*array++, str++, 2);
-			continue;
-		}
 		w_size = _first_space(str) - str;
 		if (!w_size)
 			break ;
@@ -114,7 +108,7 @@ int	_is_alpha(char c)
 
 char	*_first_space(char *str)
 {
-	while (!_isspace(*str) && *str != ';')
+	while (!_isspace(*str))
 		str++;
 	return (str);
 }
