@@ -51,7 +51,7 @@ char	*ft_strlcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char	**ft_split(char *str)
+char	***ft_split(char *str)
 {
 	char	**array;
 	char	**result;
@@ -59,7 +59,7 @@ char	**ft_split(char *str)
 	int	w_size;
 
 	count_words = _count_words(str);
-	array = malloc(sizeof(char *) * (count_words + 1));
+	array = malloc(sizeof(char **) * (count_words + 1));
 	result = array;
 	for (int i = 0; i < count_words; i++)
 	{
