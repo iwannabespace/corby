@@ -5,14 +5,14 @@
 
 typedef struct s_list
 {
-    char* value;
+    void* value;
     s_list* prev;
     s_list* next;
 } list;
 
 list* create_list();
-void push(list* l, const char* value);
-char* get(const list* l);
+void push(list* l, void* value);
+void* get(const list* l);
 void delete_list(list* l);
 
 #endif
