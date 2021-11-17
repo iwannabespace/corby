@@ -3,6 +3,6 @@
 
 #include "../include/parser.h"
 
-int compile(const CMD* cmd);
+int compile(const list* cmd);
 
 #endif

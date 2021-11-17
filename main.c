@@ -5,6 +5,6 @@
 
 int	main(int argc, char **argv)
 {
-	//CMD* a = ft_parse(argv[1]);
+	CMD* a = ft_parse(argv[1]);
 	return (0);
 }

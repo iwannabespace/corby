@@ -7,7 +7,7 @@
 #include "../include/parser.h"
 #include "../include/string.h"
 
-CMD	*ft_parse(char *fname)
+list	*ft_parse(const char *fname)
 {
 	int	res_len;
 	char	*buf1;

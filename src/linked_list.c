@@ -8,7 +8,7 @@ list* create_list()
 
 void push(list* l, void* value)
 {
-	list	new_l;
+	list*	new_l;
 	int	size;
 
 	new_l = malloc(sizeof(list));
@@ -45,7 +45,7 @@ unsigned int	list_len(list* l)
 	len = 0;
 	while (l)
 	{
-		l = l-next;
+		l = l->next;
 		len++;
 	}
 	return (len);

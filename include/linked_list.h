@@ -6,8 +6,8 @@
 typedef struct s_list
 {
     void* value;
-    s_list* prev;
-    s_list* next;
+    struct s_list* prev;
+    struct s_list* next;
 } list;
 
 list* create_list();
