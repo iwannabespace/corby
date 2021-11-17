@@ -3,8 +3,10 @@
 
 typedef struct commands
 {
-	int line_number;
-	char** command_list;
+	char*	type;
+	char*	name;
+	char*	oprt;
+	char*	value;
 } CMD;
 
 #endif

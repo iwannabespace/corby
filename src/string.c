@@ -52,7 +52,11 @@ char	*ft_strlcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
+<<<<<<< HEAD
 list	*ft_split_line(char *str)
+=======
+char	**ft_split(char *str)
+>>>>>>> 9029ec757635fbac60c8d78ce42a0d9c771c27ba
 {
 	list*		lines;
 	list*		line;
@@ -106,6 +110,10 @@ char	*_first_space(char *str)
 	return (str);
 }
 
+<<<<<<< HEAD
+=======
+/*
+>>>>>>> 9029ec757635fbac60c8d78ce42a0d9c771c27ba
 #include <stdio.h>
 
 int	main(void)
