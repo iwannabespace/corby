@@ -89,21 +89,3 @@ int	_define_variable(CMD *cmd, char **buf, int size)
 	printf("success\n");
 	return (1);
 }
-
-#include <stdio.h>
-
-int	main(int argc, char **argv)
-{
-	CMD	*a;
-
-	if (argc < 2)
-		return (0);
-
-	a = ft_parse(argv[1]);
-	printf("\n\n");
-	for (int i = 0; a[i].type; a++)
-	{
-		printf("Type: %s, Name: %s, Operator: %s, Value: %s\n", a->type, a->name, a->oprt, a->value);
-	}
-	return (0);
-}
