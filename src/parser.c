@@ -24,7 +24,7 @@ list	*ft_parse(const char *fname)
 	return (result);
 }
 
-char	*_readf(char *fname, int size)
+char	*_readf(const char *fname, int size)
 {
 	char	c;
 	char	*buf;

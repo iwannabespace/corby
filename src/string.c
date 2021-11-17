@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "../include/string.h"
+#include "../include/linked_list.h"
 
 int	ft_strlen(char *str)
 {
@@ -51,49 +52,41 @@ char	*ft_strlcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char	***ft_split(char *str)
+list	*ft_split_line(char *str)
 {
-	char	**array;
-	char	**result;
-	int	count_words;
-	int	w_size;
-
-	count_words = _count_words(str);
-	array = malloc(sizeof(char **) * (count_words + 1));
-	result = array;
-	for (int i = 0; i < count_words; i++)
+	list*		lines;
+	list*		line;
+	list*		temp;
+	char*		string;
+	unsigned int	w_size;
+	
+	lines = create_list();
+	lines->prev = 0;
+	lines->next = 0;
+	while (*str)
 	{
-		while (_isspace(*str))
-			str++;
-		w_size = _first_space(str) - str;
-		if (!w_size)
-			break ;
-		printf("%d ", w_size);
-		*array = malloc(++w_size);
-		ft_strlcpy(*array++, str, w_size);
-		printf("%s(%d)\n", *(array - 1), ft_strlen(*(array - 1)));
-		str += --w_size;
+		w_size = 0;
+		line = create_list();
+		temp = line;
+		while (*str != '\n')
+		{
+			while (_isspace(*str))
+				str++;
+			if (*_first_space(str) == '\n')
+				break ;
+			w_size = _first_space(str) - str;
+			string = malloc(++w_size);
+			ft_strlcpy(string, str, w_size);
+			line->value = string;
+			line->next = create_list();
+			line = line->next;
+			str += w_size;
+		}
+		if (w_size)
+			push(lines, (void *)temp);
+		str++;
 	}
-	*array = 0;
-	return (result);
-}
-
-int	_count_words(char *str)
-{
-	int	index;
-	int	count;
-
-	count = 0;
-	index = 0;
-	while (str[index])
-	{
-		while (_isspace(str[index]))
-			index++;
-		count += str[index] != 0;
-		while (!_isspace(str[index]) && str[index])
-			index++;
-	}
-	return (count);
+	return (lines);
 }
 
 int	_isspace(char c)
@@ -108,20 +101,25 @@ int	_is_alpha(char c)
 
 char	*_first_space(char *str)
 {
-	while (!_isspace(*str))
+	while (*str && !_isspace(*str) && *str != '\n')
 		str++;
 	return (str);
 }
-/*
+
 #include <stdio.h>
 
 int	main(void)
 {
-	char **a;
+	list* a;
+	list* b;
 
-	a = ft_split("       integer a = 5 ;\n     \n\n\n\n\n");
-	for (int i = 0; a[i]; i++)
-		printf("%s", a[i]);
+	a = ft_split_line("       integer a = 5 ssd sdf; sdf sdf\n     \n\n\n\n\n");
+	b = (list *)a->value;
+	for (int i = 0; b; i++)
+	{
+		printf("eleman = %s\n", (char *)b->value);
+		b = b->next;
+	}
 
 	return (0);
-}*/
+}
