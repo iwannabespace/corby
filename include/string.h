@@ -1,5 +1,5 @@
-#ifndef _string_h
-#define _string_h
+#ifndef _string_h_
+#define _string_h_
 
 int	ft_strlen(char *str);
 int	ft_strcmp(char *s1, char *s2);

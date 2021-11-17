@@ -9,4 +9,10 @@ typedef struct s_command
 	char	*value;
 } CMD;
 
+typedef struct commands
+{
+	int line_number;
+	char** command_list;
+} CMD2;
+
 #endif
