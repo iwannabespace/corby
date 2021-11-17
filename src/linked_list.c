@@ -11,7 +11,7 @@ void push(list* l, void* value)
 	list	new_l;
 	int	size;
 
-	new_l = malloc(list);
+	new_l = malloc(sizeof(list));
 	while (l->next)
 		l = l->next;
 	new_l->value = value;
