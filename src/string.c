@@ -51,7 +51,7 @@ char	*ft_strlcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-char	***ft_split(char *str)
+char	**ft_split(char *str)
 {
 	char	**array;
 	char	**result;
@@ -112,6 +112,7 @@ char	*_first_space(char *str)
 		str++;
 	return (str);
 }
+
 /*
 #include <stdio.h>
 
