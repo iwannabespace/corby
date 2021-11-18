@@ -4,7 +4,7 @@
 #include "../include/parser.h"
 #include "../include/flags.h"
 
-int compile(const list* cmd);
+int compile(const list* l);
 
 //aux
 c_flags check_errors_in_assignment(const CMD* cmd);

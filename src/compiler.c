@@ -4,40 +4,45 @@
 
 int is_assignment_line(const CMD* line)
 {
-    for (int i = 0; line->command_list[i]; i++)   
-        if (ft_strcmp(line->command_list[i], "<-") == 0)
+    for (list* line_val = line->value; line_val; line_val = line_val->next)
+        if (ft_strcmp(line_val->value, "<-") == 0)
             return 1;
 
     return 0;
 }
 
-int compile(const list* list)
+int compile(const list* l)
 {
-    while (list)
+    while (l)
     {
-        CMD* cmd = (CMD*)list->value; 
+        CMD* line = l->value; 
 
-        if (is_assignment_line(cmd))
+        if (is_assignment_line(line))
         {    
-            if (check_errors(cmd))
-                printf("Error in line %d\n", cmd->line_number);
+            if (check_errors_in_assignment(line))
+                printf("Error in line %d\n", line->line);
         }
 
         else
-            printf("Warning: Unknown line -> {line number: %d}\n", cmd->line_number);
+            printf("Warning: Unknown line -> {line number: %d}\n", line->line);
 
-        list = list->next;
+        l = l->next;
     }
 
     return 0;
 }
 
-c_flags check_errors_in_assignment(const CMD* cmd)
+c_flags check_errors_in_assignment(const CMD* line)
 {
-    if (command_count(cmd) != 4)
+    list* temp = line->value;
+
+    printf("command_count: %d\n", command_count(line));
+    printf("is_valid_type: %d\n", is_valid_type(temp->value));
+
+    if (command_count(line) != 4)
         return INSUFFICIENT_COMMAND_ERROR;
 
-    if (!is_valid_type(cmd->command_list[0]))
+    if (!is_valid_type(temp->value))
         return INVALID_TYPE_ERROR;
 
     return NO_ERROR;
@@ -74,11 +79,12 @@ char** data_types()
     return types;
 }
 
-int command_count(const CMD* cmd)
+int command_count(const CMD* line)
 {
     int i = 0;
 
-    for (; cmd->command_list[i]; i++) {}
+    for (list* line_val = line->value; line_val; line_val = line_val->next) 
+        i++;
 
     return i;
 }
@@ -93,21 +99,8 @@ void free_string_array(char** array)
 
 int main(int argc, char** argv)
 {
-    CMD cmd;
-
-    cmd.line_number = 0;
-
-    cmd.command_list = malloc(sizeof(char*) * 4);
-
-    for (int i = 0; i < 4; i++)
-        cmd.command_list[i] = malloc(10);
-    
-    ft_strcpy(cmd.command_list[0], "integer");
-    ft_strcpy(cmd.command_list[1], "val");
-    ft_strcpy(cmd.command_list[2], "<-");
-    ft_strcpy(cmd.command_list[3], "10");
-
-    printf("%d\n", is_assignment_line(&cmd));
+    list* data = ft_parse("e.corby");
+    compile(data);
 
     return 0;
 }

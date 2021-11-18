@@ -52,26 +52,3 @@ char	*_readf(const char *fname, int size)
 	buf[index] = '\0';
 	return (buf);
 }
-
-#include <stdio.h>
-
-int	main(void)
-{
-	list* 	a;
-	list* 	b;
-	CMD*	c;
-
-	a = ft_parse("e.corby");
-	for (; a; a = a->next)
-	{
-		c = (CMD*)a->value;
-		b = c->value;
-		printf("%d. line: ", c->line);
-		for (; b; b = b->next)
-				printf("%s ", (char*)b->value);
-		printf("\n");
-	}
-	printf("The End!\n");
-	return (0);
-}
-
