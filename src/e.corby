@@ -1,0 +1,12 @@
+integer a <- 5;
+
+string name <- "arbi"				; e++;
+
+float 			pi <- 3.14;
+
+parse("e.corby");
+
+return it;
+
+
+

@@ -7,8 +7,6 @@
 list* ft_parse(const char* fname);
 
 //aux
-char	*_readf(char *fname, int size);
-int	_cmd_count(char **buf);
-int	_define_variable(CMD *cmd, char **buf, int size);
+char	*_readf(const char *fname, int size);
 
 #endif

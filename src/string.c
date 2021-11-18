@@ -1,10 +1,9 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 #include "../include/string.h"
 #include "../include/linked_list.h"
 
-int	ft_strlen(char *str)
+int	ft_strlen(const char *str)
 {
 	int	len;
 
@@ -14,7 +13,7 @@ int	ft_strlen(char *str)
 	return (len);
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, const char *s2)
 {
 	int	index;
 
@@ -24,7 +23,7 @@ int	ft_strcmp(char *s1, char *s2)
 	return ((unsigned char)s1[index] - (unsigned char)s2[index]);
 }
 
-char	*ft_strcpy(char *dest, char *src)
+char	*ft_strcpy(char *dest, const char *src)
 {
 	unsigned int index;
 
@@ -38,7 +37,7 @@ char	*ft_strcpy(char *dest, char *src)
 	return (dest);
 }
 
-char	*ft_strlcpy(char *dest, char *src, unsigned int n)
+char	*ft_strlcpy(char *dest, const char *src, unsigned int n)
 {
 	unsigned int	index;
 
@@ -52,42 +51,26 @@ char	*ft_strlcpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
-<<<<<<< HEAD
-list	*ft_split_line(char *str)
-=======
-char	**ft_split(char *str)
->>>>>>> 9029ec757635fbac60c8d78ce42a0d9c771c27ba
+list	*ft_split_line(const char *str)
 {
 	list*		lines;
 	list*		line;
-	list*		temp;
-	char*		string;
 	unsigned int	w_size;
 	
-	lines = create_list();
-	lines->prev = 0;
-	lines->next = 0;
+	lines = 0;
 	while (*str)
 	{
+		line = 0;
 		w_size = 0;
-		line = create_list();
-		temp = line;
 		while (*str != '\n')
 		{
-			while (_isspace(*str))
-				str++;
-			if (*_first_space(str) == '\n')
-				break ;
-			w_size = _first_space(str) - str;
-			string = malloc(++w_size);
-			ft_strlcpy(string, str, w_size);
-			line->value = string;
-			line->next = create_list();
-			line = line->next;
-			str += w_size;
+			while (_isspace(*str)) str++;
+			if (*str == '\n') break ;
+			w_size = *str == ';'? 1: _first_space(str) - str;
+			pushc(&line, (void *)ft_strlcpy(malloc(++w_size), str, w_size));
+			str += --w_size;
 		}
-		if (w_size)
-			push(lines, (void *)temp);
+		if (w_size) pushc(&lines, (void *)line);
 		str++;
 	}
 	return (lines);
@@ -95,25 +78,16 @@ char	**ft_split(char *str)
 
 int	_isspace(char c)
 {
-	return ((c >= '\t' && c <= '\r') || c == ' ');
+	return (c != '\n' && (c >= '\t' && c <= '\r') || c == ' ');
 }
 
-int	_is_alpha(char c)
+char	*_first_space(const char *str)
 {
-	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
-}
-
-char	*_first_space(char *str)
-{
-	while (*str && !_isspace(*str) && *str != '\n')
+	while (*str && !_isspace(*str) && *str != '\n' && *str != ';')
 		str++;
-	return (str);
+	return ((char*)str);
 }
-
-<<<<<<< HEAD
-=======
 /*
->>>>>>> 9029ec757635fbac60c8d78ce42a0d9c771c27ba
 #include <stdio.h>
 
 int	main(void)
@@ -121,13 +95,16 @@ int	main(void)
 	list* a;
 	list* b;
 
-	a = ft_split_line("       integer a = 5 ssd sdf; sdf sdf\n     \n\n\n\n\n");
+	a = ft_split_line(" \n      integer a; -< 5; ssd sdf; sdf sdf\n string name <- \"Arbiyski\";    \n                      \nfloat pi <- 3.14;\n\n\n");
 	b = (list *)a->value;
-	for (int i = 0; b; i++)
+	for (int l = 1; a; a = a->next, l++)
 	{
-		printf("eleman = %s\n", (char *)b->value);
-		b = b->next;
+		b = (list*)a->value;
+		printf("%d. line: ", l);
+		for (; b; b = b->next)
+			printf("%s ", (char*)b->value);
+		printf("\n");
 	}
-
+	printf("The End!\n");
 	return (0);
-}
+}*/

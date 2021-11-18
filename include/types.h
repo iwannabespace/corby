@@ -1,12 +1,12 @@
 #ifndef _types_h_
 #define _types_h_
 
+#include "linked_list.h"
+
 typedef struct commands
 {
-	char*	type;
-	char*	name;
-	char*	oprt;
-	char*	value;
+	int		line;
+	list*	value;
 } CMD;
 
 #endif

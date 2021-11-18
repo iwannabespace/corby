@@ -12,6 +12,7 @@ typedef struct s_list
 
 list* create_list();
 void push(list* l, void* value);
+void pushc(list** l, void* value);
 void* get(const list* l);
 void delete_list(list* l);
 

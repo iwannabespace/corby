@@ -9,19 +9,26 @@
 
 list	*ft_parse(const char *fname)
 {
-	int	res_len;
-	char	*buf1;
-	char	**buf;
-	CMD	*result;
+	char*	buf;
+	int		line;
+	list*	lst;
+	list*	temp;
+	CMD*	cmd;
+	list*	l2;
 
-	buf1 = _readf(fname, 1024);
-	buf = ft_split(buf1);
-	res_len = _cmd_count(buf);
-	result = malloc(sizeof(CMD) * (res_len + 1));
-	if (!_define_variable(result, buf, res_len))
-		return (0);
-	result[res_len] = (CMD){0, 0, 0, 0};
-	return (result);
+	line = 1;
+	buf = _readf(fname, 1024);
+	lst = ft_split_line(buf);
+	temp = lst;
+	while(lst)
+	{
+		cmd = malloc(sizeof(CMD));
+		cmd->value = (list*)lst->value;
+		cmd->line = line++;
+		lst->value = (void*)cmd;
+		lst = lst->next;
+	}
+	return (temp);
 }
 
 char	*_readf(const char *fname, int size)
@@ -46,46 +53,25 @@ char	*_readf(const char *fname, int size)
 	return (buf);
 }
 
-int	_cmd_count(char **buf)
+#include <stdio.h>
+
+int	main(void)
 {
-	int	count;
+	list* 	a;
+	list* 	b;
+	CMD*	c;
 
-	count = 0;
-	while (*buf)
-		if (!ft_strcmp(*buf++, ";")) count++;
-	return (count);
-}
-
-int	_define_variable(CMD *cmd, char **buf, int size)
-{
-	int	index;
-	int	w_size;
-
-	index = 0;
-	while (index < size)
+	a = ft_parse("e.corby");
+	for (; a; a = a->next)
 	{
-		if (!ft_strcmp(*buf, ";"))
-			buf++;
-		printf("len for \"%s\" is %d\n", *buf, ft_strlen(*buf));
-		cmd->type = malloc(ft_strlen(*buf) + 1);
-		ft_strcpy(cmd->type, *buf);
-		printf("Type: %s, ", cmd->type);
-		buf++;
-		cmd->name = malloc(ft_strlen(*buf) + 1);
-		ft_strcpy(cmd->name, *buf);
-		printf("Name: %s, ", cmd->name);
-		buf++;
-		cmd->oprt = malloc(ft_strlen(*buf) + 1);
-		ft_strcpy(cmd->oprt, *buf);
-		printf("Operator: %s, ", cmd->oprt);
-		buf++;
-		cmd->value = malloc(ft_strlen(*buf) + 1);
-		ft_strcpy(cmd->value, *buf);
-		printf("Value: %s(%d)\n", cmd->value), ft_strlen(*buf);
-		buf++;
-		cmd++;
-		index++;
+		c = (CMD*)a->value;
+		b = c->value;
+		printf("%d. line: ", c->line);
+		for (; b; b = b->next)
+				printf("%s ", (char*)b->value);
+		printf("\n");
 	}
-	printf("success\n");
-	return (1);
+	printf("The End!\n");
+	return (0);
 }
+
