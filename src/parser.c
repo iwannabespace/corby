@@ -10,24 +10,9 @@
 list	*ft_parse(const char *fname)
 {
 	char*	buf;
-	int		line;
-	list*	lst;
-	list*	temp;
-	CMD*	cmd;
 
-	line = 1;
 	buf = _readf(fname, 1024);
-	lst = ft_split_line(buf);
-	/*temp = lst;
-	while(lst)
-	{
-		cmd = malloc(sizeof(CMD));
-		cmd->value = (list*)lst->value;
-		cmd->line = line++;
-		lst->value = (void*)cmd;
-		lst = lst->next;
-	}*/
-	return (lst);
+	return (ft_split_line(buf));
 }
 
 char	*_readf(const char *fname, int size)

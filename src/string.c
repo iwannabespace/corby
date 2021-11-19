@@ -28,11 +28,8 @@ char	*ft_strcpy(char *dest, const char *src)
 	unsigned int index;
 
 	index = 0;
-	while (src[index])
-	{
-		dest[index] = src[index];
-		index++;
-	}
+	while (*src)
+		dest[index++] = *src++
 	dest[index] = '\0';
 	return (dest);
 }
@@ -42,11 +39,8 @@ char	*ft_strlcpy(char *dest, const char *src, unsigned int n)
 	unsigned int	index;
 
 	index = 0;
-	while (src[index] && index < n - 1)
-	{
-		dest[index] = src[index];
-		index++;
-	}
+	while (*src && index < n - 1)
+		dest[index++] = *src++;
 	dest[index] = '\0';
 	return (dest);
 }
