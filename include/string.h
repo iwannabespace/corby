@@ -2,6 +2,7 @@
 #define _string_h_
 
 #include "linked_list.h"
+#include "types.h"
 
 int	ft_strlen(const char *str);
 int	ft_strcmp(char *s1, const char *s2);

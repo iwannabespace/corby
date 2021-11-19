@@ -39,7 +39,7 @@ c_flags check_errors_in_assignment(const CMD* line)
     printf("command_count: %d\n", command_count(line));
     printf("is_valid_type: %d\n", is_valid_type(temp->value));
 
-    if (command_count(line) != 4)
+    if (command_count(line) != 5)
         return INSUFFICIENT_COMMAND_ERROR;
 
     if (!is_valid_type(temp->value))

@@ -51,13 +51,16 @@ char	*ft_strlcpy(char *dest, const char *src, unsigned int n)
 	return (dest);
 }
 
-list	*ft_split_line(const char *str)
+list*	ft_split_line(const char *str)
 {
-	list*		lines;
-	list*		line;
-	unsigned int	w_size;
+	CMD* cmd;
+	list* lines;
+	list* line;
+	int line_num;
+	unsigned int w_size;
 	
 	lines = 0;
+	line_num = 1;
 	while (*str)
 	{
 		line = 0;
@@ -68,9 +71,13 @@ list	*ft_split_line(const char *str)
 			if (*str == '\n') break ;
 			w_size = *str == ';'? 1: _first_space(str) - str;
 			pushc(&line, (void *)ft_strlcpy(malloc(++w_size), str, w_size));
+			cmd = malloc(sizeof(CMD));
+			cmd->line = line_num;
+			cmd->value = line;
 			str += --w_size;
 		}
-		if (w_size) pushc(&lines, (void *)line);
+		if (w_size) pushc(&lines, (void *)cmd);
+		line_num++;
 		str++;
 	}
 	return (lines);
