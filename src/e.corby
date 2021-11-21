@@ -1,6 +1,6 @@
 integer a <- 5;
 
-string name <- "arbi"				; e++;
+string name <- "arbi"				;
 
 float 			pi <- 3.14;
 
@@ -8,7 +8,7 @@ parse("e.corby");
 
 return it;
 
-int b <- 12;
+boolean b <- 12;
 
 
 

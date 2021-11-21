@@ -29,7 +29,7 @@ char	*ft_strcpy(char *dest, const char *src)
 
 	index = 0;
 	while (*src)
-		dest[index++] = *src++
+		dest[index++] = *src++;
 	dest[index] = '\0';
 	return (dest);
 }
