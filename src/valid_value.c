@@ -29,11 +29,10 @@ int valid_float(char* val)
 		return (0);
 	while (*val >= '0' && *val <= '9')
 		val++;
-	if (*val++ != '.')
-		return (0);
+	if (*val++ != '.') return (0);
 	while (*val >= '0' && *val <= '9')
 		val++;
-	return (!*val);
+	return (!*val && *(val - 1) != '.');
 }
 
 int valid_boolean(char* val)
@@ -43,7 +42,7 @@ int valid_boolean(char* val)
 
 /*int main(int argc, char **argv)
 {
-	if (valid_boolean(argv[1]))
+	if (valid_float(argv[1]))
 		printf("valid");
 	else
 		printf("invalid");
