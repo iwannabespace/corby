@@ -28,7 +28,7 @@ void*	where_index(list* dicts, unsigned int index)
 		return (((dict*)dicts->value)->value);
 	return (0);
 }
-/*
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -54,4 +54,4 @@ int	main()
 	printf("%s\n", (char *)where_key(liste, "B"));
 
 	return (0);
-}*/
+}
