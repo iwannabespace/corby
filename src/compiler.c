@@ -159,9 +159,7 @@ int is_appropriate_name(const CMD* line, const list* data)
 
         if (is_assignment_line(line_) && line->line > line_->line)
             if (ft_strcmp(line->value->next->value, tokens->next->value) == 0)
-            {    
                 return 0;
-            }
     }
 
     return 1;
