@@ -1,4 +1,9 @@
 #include "../include/dict.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "string.h"
+#include "../include/compiler.h"
 
 void*	where_key(list* dicts, char* key)
 {
@@ -29,43 +34,82 @@ void*	where_index(list* dicts, unsigned int index)
 	return (0);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "string.h"
+list*	get_variables_until(list* data, int line)
+{
+	list* dict_list = malloc(sizeof(list));
+	dict* dicte = malloc(sizeof(dict));
+	list* beg = dict_list;
+
+	if (line == -1)
+	{
+		while (data)
+		{
+			CMD* cmd = data->value;
+			list* tokens = cmd->value;
+
+			if (is_assignment_line(cmd))
+			{	
+				dicte->key = strdup((char*)tokens->next->value);
+				dicte->value = (void*)strdup((char*)tokens->next->next->next->value);
+				dict_list->value = (void*)dicte;
+				dict_list->next = malloc(sizeof(list));
+				dict_list = dict_list->next;
+				dicte = malloc(sizeof(dict));
+			}
+
+			data = data->next;
+		}
+	}	
+
+	else if (line >= 1)
+	{
+		int i = 1;
+
+		while (data && i <= line)
+		{
+			CMD* cmd = data->value;
+			list* tokens = cmd->value;
+
+			if ((i = cmd->line) > line)
+				break;
+
+			if (is_assignment_line(cmd))
+			{	
+				dicte->key = strdup((char*)tokens->next->value);
+				dicte->value = (void*)strdup((char*)tokens->next->next->next->value);
+				dict_list->value = (void*)dicte;
+				dict_list->next = malloc(sizeof(list));
+				dict_list = dict_list->next;
+				dicte = malloc(sizeof(dict));
+			}
+			
+			data = data->next;
+		}
+	}
+
+	else
+	{
+		free(dict_list);
+		free(dicte);
+		return 0;
+	}
+
+	return beg;
+}
 
 int	main()
 {
-	/*list*	liste;
-	dict*	dicte;
-
-	liste = malloc(sizeof(list));
-	dicte = malloc(sizeof(dict));
-	dicte->key = strdup("A");
-	dicte->value = (void*)strdup("is A");
-	liste->value = (void*)dicte;
-	liste->next = malloc(sizeof(list));
-	dicte = malloc(sizeof(dict));
-	dicte->key = strdup("B");
-	dicte->value = (void*)strdup("is B");
-	liste->next->value = (void*)dicte;
-	liste->next->next = 0;
-
-	printf("%s\n", (char *)where_key(liste, "A"));
-	printf("%s\n", (char *)where_key(liste, "B"));*/
-
 	list* data = ft_parse("e.corby");
-	list* dict_list = malloc(sizeof(list));
-	dict* dicte = malloc(sizeof(dict));
+	
+	list* vars = get_variables_until(data, 3);
 
-	while (data)
+	while (vars)
 	{
-		CMD* cmd = data->value;
-		list* tokens = cmd->value;
+		dict* d = vars->value;
 
+		printf("%s -> %s\n", d->key, (char*)d->value);
 
-
-		data = data->next;
+		vars = vars->next;
 	}
 
 	return (0);
