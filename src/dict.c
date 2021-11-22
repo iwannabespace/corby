@@ -32,10 +32,11 @@ void*	where_index(list* dicts, unsigned int index)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "string.h"
 
 int	main()
 {
-	list*	liste;
+	/*list*	liste;
 	dict*	dicte;
 
 	liste = malloc(sizeof(list));
@@ -51,7 +52,21 @@ int	main()
 	liste->next->next = 0;
 
 	printf("%s\n", (char *)where_key(liste, "A"));
-	printf("%s\n", (char *)where_key(liste, "B"));
+	printf("%s\n", (char *)where_key(liste, "B"));*/
+
+	list* data = ft_parse("e.corby");
+	list* dict_list = malloc(sizeof(list));
+	dict* dicte = malloc(sizeof(dict));
+
+	while (data)
+	{
+		CMD* cmd = data->value;
+		list* tokens = cmd->value;
+
+
+
+		data = data->next;
+	}
 
 	return (0);
 }
