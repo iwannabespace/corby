@@ -29,17 +29,22 @@ int valid_float(char* val)
 		return (0);
 	while (*val >= '0' && *val <= '9')
 		val++;
-	if (*val != '.')
+	if (*val++ != '.')
 		return (0);
 	while (*val >= '0' && *val <= '9')
 		val++;
-	return (*val);
+	return (!*val);
+}
+
+int valid_boolean(char* val)
+{
+	return (!ft_strcmp(val, "true") || !ft_strcmp(val, "false"));
 }
 #include <stdio.h>
 
 int main(int argc, char **argv)
 {
-	if (valid_float(argv[1]))
+	if (valid_boolean(argv[1]))
 		printf("valid");
 	else
 		printf("invalid");

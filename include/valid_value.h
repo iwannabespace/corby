@@ -3,7 +3,9 @@
 
 #include "string.h"
 
-int	valid_int(char* val);
-int	valid_string(char* val);
+int valid_int(char* val);
+int valid_string(char* val);
+int valid_float(char* val);
+int valid_boolean(char* val);
 
 #endif
