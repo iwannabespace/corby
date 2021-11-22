@@ -198,7 +198,7 @@ void free_string_array(char** array)
     free(array);
 }
 
-int main(int argc, char** argv)
+/*int main(int argc, char** argv)
 {
     list* data = ft_parse("e.corby");
     c_result result = compile(data);
@@ -248,4 +248,4 @@ int main(int argc, char** argv)
     }
 
     return 0;
-}
+}*/

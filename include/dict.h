@@ -12,5 +12,6 @@ typedef struct s_dict
 
 void*	where_key(list* dicts, char *key);
 void*	where_index(list* dicts, unsigned int index);
+list*	get_variables_until(list* data, int line);
 
 #endif
