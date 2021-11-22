@@ -40,7 +40,7 @@ c_result compile(const list* data)
                 break;
 
             case INVALID_VALUE_ERROR: 
-                printf("Error: Invalid value for type '%s' in assignment line %d\n", line->value->value, line->line);
+                printf("Error: Invalid value for type '%s' in assignment line %d\n", (char*)line->value->value, line->line);
                 error_count++;
                 break;
 

@@ -64,7 +64,8 @@ list*	ft_split_line(const char *str)
 			while (_isspace(*str)) str++;
 			if (*str == '\n') break ;
 			w_size = *str == ';'? 1: _first_space(str) - str;
-			pushc(&line, (void *)ft_strlcpy(malloc(++w_size), str, w_size));
+			w_size++;
+			pushc(&line, (void *)ft_strlcpy(malloc(w_size), str, w_size));
 			cmd = malloc(sizeof(CMD));
 			cmd->line = line_num;
 			cmd->value = line;
