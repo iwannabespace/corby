@@ -40,12 +40,54 @@ int valid_boolean(char* val)
 	return (!ft_strcmp(val, "true") || !ft_strcmp(val, "false"));
 }
 
-/*int main(int argc, char **argv)
+int	valid_operation(list* opr)
 {
-	if (valid_float(argv[1]))
+	int	paranthese;
+	int	operator;
+	char*	valid_opr = "+-*/";
+
+	paranthese = 0;
+	operator=  0;
+	while(opr)
+	{
+		if (!ft_strcmp((char*)opr->value, "("))
+			paranthese++;
+		else if (!ft_strcmp((char*)opr->value, ")") && paranthese)
+			paranthese--;
+		else if (!ft_strcmp((char*)opr->value, ")"))
+			return (0);
+		else if (operator)
+			if (!valid_int((char*)opr->value))
+				return (0);
+		else
+			if (!instr(*(char*)opr->value, valid_opr))
+				return (0);
+		opr = opr->next;
+	}
+	return (!paranthese);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+#include "../include/linked_list.h"
+
+int main(int argc, char **argv)
+{
+	list* a;
+
+	a = malloc(sizeof(list));
+	a->value = strdup("(");
+	a->next = malloc(sizeof(list));
+	a->next->value = strdup("7");
+	a->next->next = malloc(sizeof(list));
+	a->next->next->value = strdup("(");
+	a->next->next->next = 0;
+	
+	if (valid_operation(a))
 		printf("valid");
 	else
 		printf("invalid");
 	printf("\n");
 	return (0);
-}*/
+}
