@@ -50,7 +50,8 @@ int	main()
 	liste->next->value = (void*)dicte;
 	liste->next->next = 0;
 
-	printf("%s\n", (char *)where_index(liste, 2));
+	printf("%s\n", (char *)where_index(liste, 0));
+	printf("%s\n", (char *)where_key(liste, "B"));
 
 	return (0);
 }*/

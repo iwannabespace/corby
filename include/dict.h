@@ -10,4 +10,7 @@ typedef struct s_dict
 	void*	value;
 } dict;
 
+void*	where_key(list* dicts, char *key);
+void*	where_index(list* dicts, unsigned int index);
+
 #endif
