@@ -40,9 +40,8 @@ int valid_boolean(char* val)
 {
 	return (!ft_strcmp(val, "true") || !ft_strcmp(val, "false"));
 }
-#include <stdio.h>
 
-int main(int argc, char **argv)
+/*int main(int argc, char **argv)
 {
 	if (valid_boolean(argv[1]))
 		printf("valid");
@@ -50,4 +49,4 @@ int main(int argc, char **argv)
 		printf("invalid");
 	printf("\n");
 	return (0);
-}
+}*/
