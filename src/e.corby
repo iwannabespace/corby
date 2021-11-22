@@ -1,8 +1,8 @@
 integer a <- 5;
 
-string name <- "arbi"				;
+string name <- "arbi"
 
-float 			pi <- 3.14;
+float 			a <- 3.14;
 
 parse("e.corby");
 

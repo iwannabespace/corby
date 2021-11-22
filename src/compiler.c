@@ -4,15 +4,16 @@
 
 #include <stdio.h>
 
-c_result compile(const list* l)
+c_result compile(const list* data)
 {
+    const list* data_copy = data;
     int error_count = 0;
     int warning_count = 0;
 
-    while (l)
+    while (data)
     {
-        CMD* line = l->value; 
-        c_flags error = check_line(line);
+        CMD* line = data->value; 
+        c_flags error = check_line(line, data_copy);
 
         set_text_color(RED);
         switch (error)
@@ -37,6 +38,10 @@ c_result compile(const list* l)
                 error_count++;
                 break;
 
+            case VARIABLE_NAME_ALREADY_EXISTS_ERROR:    
+                printf("Error: Variable name already exits for line %d\n", line->line);
+                break;
+
             case WARNING:   
                 set_text_color(YELLOW);
                 printf("Warning: Uncompilable line -> {line number: %d}\n", line->line);
@@ -50,13 +55,13 @@ c_result compile(const list* l)
         }
         set_text_color(RESET);
 
-        l = l->next;
+        data = data->next;
     }
 
     return (c_result){ error_count, warning_count };
 }
 
-c_flags check_line(const CMD* line)
+c_flags check_line(const CMD* line, const list* data)
 {
     list* beg = line->value;
     list* temp = line->value;
@@ -68,13 +73,11 @@ c_flags check_line(const CMD* line)
     for (; temp; temp = temp->next, j++)
     {    
         if (ft_strcmp(temp->value, ";") == 0)
-        {    
             if (!is_semicolon_present)
             {
                 i = j;
                 is_semicolon_present = 1;
             }
-        }
 
         if (ft_strcmp(temp->value, "<-") == 0)
             is_assignment_line = 1;
@@ -93,10 +96,13 @@ c_flags check_line(const CMD* line)
         if (j != 4)
             return INSUFFICIENT_COMMAND_ERROR;
 
-        if (!is_valid_type(temp->value))
+        else if (!is_valid_type(temp->value))
             return INVALID_TYPE_ERROR;
 
-        if (j == 4 && is_valid_type(temp->value))
+        else if (!is_appropriate_name(line, data))
+            return VARIABLE_NAME_ALREADY_EXISTS_ERROR;
+
+        else 
             return NO_ERROR;
     }
 
@@ -126,6 +132,23 @@ int is_assignment_line(const CMD* line)
             return 1;
 
     return 0;
+}
+
+int is_appropriate_name(const CMD* line, const list* data)
+{    
+    for (; data; data = data->next)
+    {
+        CMD* line_ = data->value;
+        list* tokens = line_->value;
+
+        if (is_assignment_line(line_) && line->line > line_->line)
+            if (ft_strcmp(((list*)line->value)->next->value, tokens->next->value) == 0)
+            {    
+                return 0;
+            }
+    }
+
+    return 1;
 }
 
 char** data_types()

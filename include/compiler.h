@@ -10,11 +10,12 @@ typedef struct t_result
     int warning_count;
 } c_result;
 
-c_result compile(const list* l);
+c_result compile(const list* data);
 
 //aux
-c_flags check_line(const CMD* line);
+c_flags check_line(const CMD* line, const list* data);
 int is_assignment_line(const CMD* line);
+int is_appropriate_name(const CMD* line, const list* data);
 int command_count(const CMD* line);
 int is_valid_type(char* type);
 char** data_types();
