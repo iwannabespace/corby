@@ -9,6 +9,7 @@ int	ft_strcmp(char *s1, const char *s2);
 char	*ft_strcpy(char *dest, const char *src);
 char	*ft_strlcpy(char *dest, const char *src, unsigned int n);
 list*	ft_split_line(const char *str);
+int	instr(char c, char* str);
 
 //aux
 int	_isspace(char c);

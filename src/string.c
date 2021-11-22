@@ -77,6 +77,13 @@ list*	ft_split_line(const char *str)
 	return (lines);
 }
 
+int	instr(char c, char* str)
+{
+	while (*str != c && *str)
+		str++;
+	return (*str);
+}
+
 int	_isspace(char c)
 {
 	return (c != '\n' && (c >= '\t' && c <= '\r') || c == ' ');
