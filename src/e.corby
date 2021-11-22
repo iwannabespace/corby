@@ -1,14 +1,14 @@
 integer a <- 5;
 
-string name <- "arbi"
+string name <- "\"arbi\"";
 
-float 			a <- 3.14;
+float 			pi <- 14.;
 
 parse("e.corby");
 
 return it;
 
-boolean b <- 12;
+boolean b <- true;
 
 
 

@@ -1,6 +1,7 @@
 #include "../include/compiler.h"
 #include "../include/string.h"
 #include "../include/colorizer.h"
+#include "../include/valid_value.h"
 
 #include <stdio.h>
 
@@ -38,8 +39,14 @@ c_result compile(const list* data)
                 error_count++;
                 break;
 
+            case INVALID_VALUE_ERROR: 
+                printf("Error: Invalid value for type '%s' in assignment line %d\n", (char*)line->value->value, line->line);
+                error_count++;
+                break;
+
             case VARIABLE_NAME_ALREADY_EXISTS_ERROR:    
                 printf("Error: Variable name already exits for line %d\n", line->line);
+                error_count++;
                 break;
 
             case WARNING:   
@@ -81,6 +88,7 @@ c_flags check_line(const CMD* line, const list* data)
 
         if (ft_strcmp(temp->value, "<-") == 0)
             is_assignment_line = 1;
+
     }
     temp = beg;
     j--;
@@ -92,7 +100,9 @@ c_flags check_line(const CMD* line, const list* data)
         return TOKEN_OVERFLOW_ERROR;
 
     if (is_assignment_line)
-    {    
+    {       
+        char* value = temp->next->next->next->value;
+
         if (j != 4)
             return INSUFFICIENT_COMMAND_ERROR;
 
@@ -101,6 +111,12 @@ c_flags check_line(const CMD* line, const list* data)
 
         else if (!is_appropriate_name(line, data))
             return VARIABLE_NAME_ALREADY_EXISTS_ERROR;
+
+        else if ((ft_strcmp(temp->value, "integer") == 0 && !valid_int(value)) ||
+                 (ft_strcmp(temp->value, "float") == 0 && !valid_float(value)) ||
+                 (ft_strcmp(temp->value, "string") == 0 && !valid_string(value)) ||
+                 (ft_strcmp(temp->value, "boolean") == 0 && !valid_boolean(value)))
+            return INVALID_VALUE_ERROR;
 
         else 
             return NO_ERROR;
@@ -142,10 +158,8 @@ int is_appropriate_name(const CMD* line, const list* data)
         list* tokens = line_->value;
 
         if (is_assignment_line(line_) && line->line > line_->line)
-            if (ft_strcmp(((list*)line->value)->next->value, tokens->next->value) == 0)
-            {    
+            if (ft_strcmp(line->value->next->value, tokens->next->value) == 0)
                 return 0;
-            }
     }
 
     return 1;
