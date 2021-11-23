@@ -58,7 +58,7 @@ int	valid_operation(list* opr)
 			paranthese--;
 		else if (!ft_strcmp((char*)opr->value, ")"))
 			return (0);
-		else if (operator)
+		else if (!operator)
 			if (!valid_int((char*)opr->value))
 				return (0);
 		else
@@ -67,7 +67,7 @@ int	valid_operation(list* opr)
 		operator = !operator;
 		opr = opr->next;
 	}
-	return (!paranthese && !operator);
+	return (!paranthese && operator);
 }
 
 #include <stdio.h>
