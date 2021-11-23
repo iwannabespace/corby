@@ -33,13 +33,13 @@ void*    where_index(list* dicts, unsigned int index)
         return (((dict*)dicts->value)->value);
     return (0);
 }
-<<<<<<< HEAD
 
 list*	get_variables_until(list* data, int line)
 {
 	list* dict_list = malloc(sizeof(list));
-	dict* dicte = malloc(sizeof(dict));
+	dict* dicte;
 	list* beg = dict_list;
+	list* temp;
 
 	if (line == -1)
 	{
@@ -50,12 +50,13 @@ list*	get_variables_until(list* data, int line)
 
 			if (is_assignment_line(cmd))
 			{	
+				dicte = malloc(sizeof(dict));
 				dicte->key = strdup((char*)tokens->next->value);
 				dicte->value = (void*)strdup((char*)tokens->next->next->next->value);
 				dict_list->value = (void*)dicte;
 				dict_list->next = malloc(sizeof(list));
+				temp = dict_list;
 				dict_list = dict_list->next;
-				dicte = malloc(sizeof(dict));
 			}
 
 			data = data->next;
@@ -76,12 +77,13 @@ list*	get_variables_until(list* data, int line)
 
 			if (is_assignment_line(cmd))
 			{	
+				dicte = malloc(sizeof(dict));
 				dicte->key = strdup((char*)tokens->next->value);
 				dicte->value = (void*)strdup((char*)tokens->next->next->next->value);
 				dict_list->value = (void*)dicte;
 				dict_list->next = malloc(sizeof(list));
+				temp = dict_list;
 				dict_list = dict_list->next;
-				dicte = malloc(sizeof(dict));
 			}
 			
 			data = data->next;
@@ -94,7 +96,7 @@ list*	get_variables_until(list* data, int line)
 		free(dicte);
 		return 0;
 	}
-
+	temp->next = 0;
 	return beg;
 }
 
@@ -107,7 +109,7 @@ int	main()
 	while (vars)
 	{
 		dict* d = vars->value;
-
+		
 		printf("%s -> %s\n", d->key, (char*)d->value);
 
 		vars = vars->next;
@@ -115,5 +117,3 @@ int	main()
 
 	return (0);
 }
-=======
->>>>>>> aad0b5d8f172d933e2817bbadc5495e162f43ba2

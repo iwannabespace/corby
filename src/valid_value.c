@@ -71,7 +71,7 @@ int	valid_operation(list* opr)
 #include <string.h>
 
 #include "../include/linked_list.h"
-
+/*
 int main(int argc, char **argv)
 {
 	list* a;
@@ -91,4 +91,4 @@ int main(int argc, char **argv)
 	printf("\n");
 	//asdasd
 	return (0);
-}
+}*/
