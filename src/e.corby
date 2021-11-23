@@ -2,6 +2,8 @@ integer a <- 5;
 
 string name <- "arbi";
 
+integer bday <- 1999;
+
 float 			pi <- 14.5;
 
 parse("e.corby");

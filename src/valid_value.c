@@ -48,6 +48,8 @@ int	valid_operation(list* opr)
 
 	paranthese = 0;
 	operator=  0;
+	if (instr(*(char*)opr->value, valid_opr))
+		return (0);
 	while(opr)
 	{
 		if (!ft_strcmp((char*)opr->value, "("))
@@ -62,26 +64,28 @@ int	valid_operation(list* opr)
 		else
 			if (!instr(*(char*)opr->value, valid_opr))
 				return (0);
+		operator = !operator;
 		opr = opr->next;
 	}
-	return (!paranthese);
+	return (!paranthese && !operator);
 }
 
 #include <stdio.h>
 #include <string.h>
 
 #include "../include/linked_list.h"
-/*
+#include "../include/compiler.h"
+
 int main(int argc, char **argv)
 {
 	list* a;
 
 	a = malloc(sizeof(list));
-	a->value = strdup("(");
+	a->value = strdup("4");
 	a->next = malloc(sizeof(list));
-	a->next->value = strdup("7");
+	a->next->value = strdup("+");
 	a->next->next = malloc(sizeof(list));
-	a->next->next->value = strdup("(");
+	a->next->next->value = strdup("9");
 	a->next->next->next = 0;
 	
 	if (valid_operation(a))
@@ -91,4 +95,4 @@ int main(int argc, char **argv)
 	printf("\n");
 	//asdasd
 	return (0);
-}*/
+}

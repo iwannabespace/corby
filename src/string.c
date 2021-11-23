@@ -59,10 +59,10 @@ list*	ft_split_line(const char *str)
 	{
 		line = 0;
 		w_size = 0;
-		while (*str != '\n')
+		while (*str != '\n' && *str)
 		{
 			while (_isspace(*str)) str++;
-			if (*str == '\n') break ;
+			if (*str == '\n' && *str) break ;
 			w_size = *str == ';'? 1: _first_space(str) - str;
 			w_size++;
 			pushc(&line, (void *)ft_strlcpy(malloc(w_size), str, w_size));
