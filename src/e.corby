@@ -1,16 +1,5 @@
-integer a <- 5;
-
-string name <- "arbi";
-
-integer bday <- 1999;
-
-float 			pi <- 14.5;
-
-parse("e.corby");
-
-return it;
-
-boolean b <- true;
-
-
-
+integer a <- 100;
+string b <- "selam";
+boolean c <- false;
+float d <- 10.2;
+float e <- 210.4;

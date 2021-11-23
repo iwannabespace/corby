@@ -69,30 +69,3 @@ int	valid_operation(list* opr)
 	}
 	return (!paranthese && !operator);
 }
-
-#include <stdio.h>
-#include <string.h>
-
-#include "../include/linked_list.h"
-#include "../include/compiler.h"
-
-int main(int argc, char **argv)
-{
-	list* a;
-
-	a = malloc(sizeof(list));
-	a->value = strdup("4");
-	a->next = malloc(sizeof(list));
-	a->next->value = strdup("+");
-	a->next->next = malloc(sizeof(list));
-	a->next->next->value = strdup("9");
-	a->next->next->next = 0;
-	
-	if (valid_operation(a))
-		printf("valid");
-	else
-		printf("invalid");
-	printf("\n");
-	//asdasd
-	return (0);
-}

@@ -62,16 +62,17 @@ list*	get_variables_until(list* data, int line)
 			data = data->next;
 		}
 	}	
+
 	else if (line >= 1)
 	{
-		int i = 1;
-
-		while (data && i <= line)
+		while (data)
 		{
 			CMD* cmd = data->value;
 			list* tokens = cmd->value;
+			
+			printf("line: %d\n", cmd->line);
 
-			if ((i = cmd->line) > line)
+			if (cmd->line > line)
 				break;
 
 			if (is_assignment_line(cmd))
@@ -88,30 +89,32 @@ list*	get_variables_until(list* data, int line)
 			data = data->next;
 		}
 	}
+
 	else
 	{
 		free(dict_list);
 		return 0;
 	}
+
 	temp->next = 0;
 	free(dict_list);
+
 	return beg;
 }
 
-int	main()
+/*int main()
 {
 	list* data = ft_parse("e.corby");
+	list* result = get_variables_until(data, -1);
 	
-	list* vars = get_variables_until(data, 3);
-
-	while (vars)
+	while (result)
 	{
-		dict* d = vars->value;
-		
-		printf("%s -> %s\n", d->key, (char*)d->value);
+		dict* a = result->value;
 
-		vars = vars->next;
+		printf("%s -> %s\n", a->key, (char*)a->value);
+
+		result = result->next;
 	}
 
-	return (0);
-}
+	return 0;
+}*/

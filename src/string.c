@@ -62,8 +62,9 @@ list*	ft_split_line(const char *str)
 		while (*str != '\n' && *str)
 		{
 			while (_isspace(*str)) str++;
-			if (*str == '\n' && *str) break ;
-			w_size = *str == ';'? 1: _first_space(str) - str;
+			if (*str == '\n' && *str) 
+				break ;
+			w_size = *str == ';' ? 1 : _first_space(str) - str;
 			w_size++;
 			pushc(&line, (void *)ft_strlcpy(malloc(w_size), str, w_size));
 			cmd = malloc(sizeof(CMD));
@@ -71,7 +72,8 @@ list*	ft_split_line(const char *str)
 			cmd->value = line;
 			str += --w_size;
 		}
-		if (w_size) pushc(&lines, (void *)cmd);
+		if (w_size) 
+			pushc(&lines, (void *)cmd);
 		line_num++;
 		str++;
 	}
@@ -96,24 +98,3 @@ char	*_first_space(const char *str)
 		str++;
 	return ((char*)str);
 }
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	list* a;
-	list* b;
-
-	a = ft_split_line(" \n      integer a; -< 5; ssd sdf; sdf sdf\n string name <- \"Arbiyski\";    \n                      \nfloat pi <- 3.14;\n\n\n");
-	b = (list *)a->value;
-	for (int l = 1; a; a = a->next, l++)
-	{
-		b = (list*)a->value;
-		printf("%d. line: ", l);
-		for (; b; b = b->next)
-			printf("%s ", (char*)b->value);
-		printf("\n");
-	}
-	printf("The End!\n");
-	return (0);
-}*/
