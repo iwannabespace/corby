@@ -62,7 +62,6 @@ list*	get_variables_until(list* data, int line)
 			data = data->next;
 		}
 	}	
-
 	else if (line >= 1)
 	{
 		int i = 1;
@@ -89,14 +88,13 @@ list*	get_variables_until(list* data, int line)
 			data = data->next;
 		}
 	}
-
 	else
 	{
 		free(dict_list);
-		free(dicte);
 		return 0;
 	}
 	temp->next = 0;
+	free(dict_list);
 	return beg;
 }
 
